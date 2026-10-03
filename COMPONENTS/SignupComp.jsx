@@ -25,7 +25,7 @@ function SignupComp() {
         <input type="text" name="username" id="" placeholder='********' className='border-1 border-gray-200 py-2 px-2 w-[320px] rounded-md focus:outline-none'/>
       </div>
 
-      <button className='w-[320px] bg-gray-600 text-white font-bold py-2 rounded-md hover:bg-gray-700 cursor-pointer'>Sign Up</button>
+      <button type='submit' className='w-[320px] bg-gray-600 text-white font-bold py-2 rounded-md hover:bg-gray-700 cursor-pointer'>Sign Up</button>
       <p>Already have an account? <span className='italic underline'><Link to={"/"}>Log In</Link></span></p>
     </form>
    </div>
