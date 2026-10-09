@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 function SignupComp() {
+  const navigate = useNavigate();
   const [data, setData] = useState({
-    fullName: "",
+    fullname: "",
     username: "",
     email: "",
     password: "",
@@ -16,21 +19,34 @@ function SignupComp() {
     console.log({ ...data, [name]: value });
   }
 
+  async function submitSignUp(e) {
+    e.preventDefault();
+    console.log("Submit SignUp was clicked");
+    try {
+      const response = await axios.post("http://localhost:5000/sign-up", data);
+      console.log(response.data);
+      navigate("/");
+      toast.success("Signed Up successfully");
+    } catch (error) {
+      console.log(error.response?.data || error.message);
+    }
+  }
+
   return (
     <>
       <div className="wrapper min-h-screen flex justify-center items-center">
-        <form className="contain flex flex-col gap-6">
+        <form className="contain flex flex-col gap-6" onSubmit={submitSignUp}>
           <p className="text-2xl font-bold text-center">Register An Account!</p>
 
           <div className="flex flex-col gap-2">
             <p className="font-medium">Enter Full Name:</p>
             <input
               type="text"
-              name="fullName"
+              name="fullname"
               id=""
               placeholder="eg: John Doe"
               className="border-1 border-gray-200 py-2 px-2 w-[320px] rounded-md focus:outline-none"
-              value={data.fullName}
+              value={data.fullname}
               onChange={getData}
             />
           </div>

@@ -24,7 +24,7 @@ function LoginComp() {
       const response = await axios.post("http://localhost:5000/log-in", value);
       console.log(response.data);
       navigate("/form");
-      toast.success('Logged In')
+      toast.success('Logged In Successfully')
     } catch (error) {
       console.log(error.response?.data || error.message);
     }
