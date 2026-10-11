@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 
 function LoginComp() {
   const navigate = useNavigate();
+  const [error, setError] = useState("");
   const [value, setValue] = useState({
     username: "",
     password: "",
@@ -24,9 +25,11 @@ function LoginComp() {
       const response = await axios.post("http://localhost:5000/log-in", value);
       console.log(response.data);
       navigate("/form");
-      toast.success('Logged In Successfully')
+      toast.success("Logged In Successfully");
     } catch (error) {
-      console.log(error.response?.data || error.message);
+      const errorMessage =
+        error.response?.data.message || "Something went wrong";
+      setError(errorMessage);
     }
   }
 
@@ -61,6 +64,8 @@ function LoginComp() {
             />
           </div>
 
+          {error &&
+          <p className="text-red-800 text-[18px] font-medium">{error}</p>}
           <button
             type="submit"
             className="w-[320px] bg-gray-600 text-white font-bold py-2 rounded-md hover:bg-gray-700 cursor-pointer"

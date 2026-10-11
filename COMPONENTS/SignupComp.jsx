@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 
 function SignupComp() {
   const navigate = useNavigate();
+  const [error,setError] = useState('');
   const [data, setData] = useState({
     fullname: "",
     username: "",
@@ -28,7 +29,8 @@ function SignupComp() {
       navigate("/");
       toast.success("Signed Up successfully");
     } catch (error) {
-      console.log(error.response?.data || error.message);
+      const errorMessage = error.response?.data.message || "Something went wrong"
+      setError(errorMessage);
     }
   }
 
@@ -86,6 +88,8 @@ function SignupComp() {
               onChange={getData}
             />
           </div>
+          {error &&(
+          <p className="text-[18px] font-medium text-red-800">{error}</p>)}
 
           <button
             type="submit"
